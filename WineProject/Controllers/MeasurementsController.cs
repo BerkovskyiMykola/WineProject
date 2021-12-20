@@ -51,7 +51,7 @@ namespace WineProject.Controllers
         {
             var barrel = await _context.Barrels
                 .Include(x => x.Measurements)
-                .SingleOrDefaultAsync(x => x.User.Email == HttpContext.User.Identity.Name && x.BarrelId == measurement.MeasurementId);
+                .SingleOrDefaultAsync(x => x.User.Email == HttpContext.User.Identity.Name && x.BarrelId == measurement.BarrelId);
 
             if (barrel == null)
             {
@@ -69,17 +69,17 @@ namespace WineProject.Controllers
                 measurement.AlcoholContent, 
                 measurement.Acidity, 
                 measurement.Weight, 
-                measurement.DateTime 
+                measurement.DateTime
             });
         }
 
         [Authorize(Roles = "User,VIP")]
-        [HttpPost("createRandom/{measurementId}")]
-        public async Task<ActionResult<Measurement>> PostMeasurement(int measurementId)
+        [HttpPost("createRandom/{barrelId}")]
+        public async Task<ActionResult<Measurement>> PostMeasurement(int barrelId)
         {
             var barrel = await _context.Barrels
                 .Include(x => x.Measurements)
-                .SingleOrDefaultAsync(x => x.User.Email == HttpContext.User.Identity.Name && x.BarrelId == measurementId);
+                .SingleOrDefaultAsync(x => x.User.Email == HttpContext.User.Identity.Name && x.BarrelId == barrelId);
 
             if (barrel == null)
             {
@@ -93,6 +93,7 @@ namespace WineProject.Controllers
                 AlcoholContent = new Random().NextDouble(0.03, 0.3),
                 Acidity = new Random().NextDouble(0.05, 0.4),
                 Weight = new Random().NextDouble(0.0, 300.0),
+                BarrelId = barrel.BarrelId,
             };
 
             _context.Measurements.Add(measurement);

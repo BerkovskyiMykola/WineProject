@@ -29,7 +29,7 @@ namespace WineProject.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> Register(RegisterRequest model, string referalToken)
+        public async Task<IActionResult> Register(RegisterRequest model)
         {
             if (await _context.Users.AnyAsync(x => x.Email == model.Email))
             {

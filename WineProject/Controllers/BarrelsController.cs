@@ -68,7 +68,6 @@ namespace WineProject.Controllers
             }
 
             _context.Entry(barrel).State = EntityState.Modified;
-            _context.Entry(barrel).Property(x => x.User).IsModified = false;
             _context.Entry(barrel).Property(x => x.UserId).IsModified = false;
 
             try
