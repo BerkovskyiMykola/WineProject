@@ -12,6 +12,8 @@ using WineProject.Services.Pay;
 using System;
 using WineProject.Services.Authorization.Settings;
 using WineProject.Sevices.Authorization;
+using WineProject.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace WineProject
 {
@@ -27,9 +29,12 @@ namespace WineProject
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            string connection = Configuration.GetConnectionString("DefaultConnection");
+            services.AddDbContext<DataContext>(options =>
+                options.UseSqlServer(connection));
 
             services.AddControllersWithViews().AddNewtonsoftJson(options =>
-            options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
             services.AddTransient<IJwtService, JwtService>();
 
