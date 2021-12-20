@@ -71,7 +71,7 @@ namespace WineProject.Migrations
                 {
                     MeasurementId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Temperature = table.Column<int>(type: "int", nullable: false),
+                    Temperature = table.Column<double>(type: "float", nullable: false),
                     SugarContent = table.Column<double>(type: "float", nullable: false),
                     Transparency = table.Column<double>(type: "float", nullable: false),
                     AlcoholContent = table.Column<double>(type: "float", nullable: false),

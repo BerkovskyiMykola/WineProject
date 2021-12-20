@@ -69,8 +69,8 @@ namespace WineProject.Migrations
                     b.Property<double>("SugarContent")
                         .HasColumnType("float");
 
-                    b.Property<int>("Temperature")
-                        .HasColumnType("int");
+                    b.Property<double>("Temperature")
+                        .HasColumnType("float");
 
                     b.Property<double>("Transparency")
                         .HasColumnType("float");

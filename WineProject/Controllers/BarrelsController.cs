@@ -22,11 +22,11 @@ namespace WineProject.Controllers
         }
 
         [Authorize(Roles = "User,VIP")]
-        [HttpGet("all")]
-        public async Task<IActionResult> GetBarrels()
+        [HttpGet("allActive")]
+        public async Task<IActionResult> GetActiveBarrels()
         {
             var user = await _context.Users
-                .Include(x => x.Barrels)
+                .Include(x => x.Barrels.Where(x => x.DateStart.AddMonths(x.AmountMonth).Date > DateTime.Today))
                 .SingleOrDefaultAsync(x => x.Email == HttpContext.User.Identity.Name);
 
             if (user == null)
@@ -35,6 +35,22 @@ namespace WineProject.Controllers
             }
 
             return Ok(user.Barrels.Select(x => new { x.BarrelId, x.Sort, x.DateStart, x.AmountMonth}));
+        }
+
+        [Authorize(Roles = "VIP")]
+        [HttpGet("allInActive")]
+        public async Task<IActionResult> GetInactiveBarrels()
+        {
+            var user = await _context.Users
+                .Include(x => x.Barrels.Where(x => x.DateStart.AddMonths(x.AmountMonth).Date < DateTime.Today))
+                .SingleOrDefaultAsync(x => x.Email == HttpContext.User.Identity.Name);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(user.Barrels.Select(x => new { x.BarrelId, x.Sort, x.DateStart, x.AmountMonth }));
         }
 
         [Authorize(Roles = "User,VIP")]
@@ -76,7 +92,7 @@ namespace WineProject.Controllers
 
         [Authorize(Roles = "User,VIP")]
         [HttpPost("create")]
-        public async Task<ActionResult<Barrel>> PostBarrel(Barrel barrel)
+        public async Task<IActionResult> PostBarrel(Barrel barrel)
         {
             barrel.User = await _context.Users
                 .SingleOrDefaultAsync(x => x.Email == HttpContext.User.Identity.Name);
@@ -84,7 +100,7 @@ namespace WineProject.Controllers
             _context.Barrels.Add(barrel);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetBarrel", new { id = barrel.BarrelId }, barrel);
+            return Ok(new { barrel.BarrelId, barrel.Sort, barrel.DateStart, barrel.AmountMonth });
         }
 
         [Authorize(Roles = "User,VIP")]

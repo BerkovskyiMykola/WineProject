@@ -10,7 +10,7 @@ using WineProject.Models;
 namespace WineProject.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20211220165933_init")]
+    [Migration("20211220183928_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -71,8 +71,8 @@ namespace WineProject.Migrations
                     b.Property<double>("SugarContent")
                         .HasColumnType("float");
 
-                    b.Property<int>("Temperature")
-                        .HasColumnType("int");
+                    b.Property<double>("Temperature")
+                        .HasColumnType("float");
 
                     b.Property<double>("Transparency")
                         .HasColumnType("float");
