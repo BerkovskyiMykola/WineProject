@@ -69,6 +69,7 @@ namespace WineProject.Controllers
 
             _context.Entry(barrel).State = EntityState.Modified;
             _context.Entry(barrel).Property(x => x.UserId).IsModified = false;
+            _context.Entry(barrel).Property(x => x.DateStart).IsModified = false;
 
             try
             {
@@ -96,6 +97,7 @@ namespace WineProject.Controllers
             barrel.User = await _context.Users
                 .SingleOrDefaultAsync(x => x.Email == HttpContext.User.Identity.Name);
 
+            barrel.DateStart = DateTime.Today;
             _context.Barrels.Add(barrel);
             await _context.SaveChangesAsync();
 

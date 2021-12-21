@@ -11,7 +11,7 @@ namespace WineProject.Models
         [StringLength(30, MinimumLength = 2)]
         public string Sort { get; set; }
         public DateTime DateStart { get; set; }
-        [Range(0, int.MaxValue)]
+        [Range(1, int.MaxValue)]
         public int AmountMonth { get; set; }
 
         public int UserId { get; set; }

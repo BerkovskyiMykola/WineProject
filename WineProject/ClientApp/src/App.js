@@ -8,6 +8,7 @@ import './App.css'
 import Login from "./components/Login";
 import Register from "./components/Register";
 import Profile from "./components/Profile";
+import Barrel from "./components/Barrel/Barrel";
 import User from "./components/User/User";
 import { Home } from "./components/Home";
 import NotFound from "./components/NotFound";
@@ -85,7 +86,11 @@ export default function App() {
                                     </li>
                                     </>
                                 ) : (<>
-                                    
+                                    <li className="nav-item">
+                                        <Link to={"/barrels"} className="nav-link">
+                                            {t("Barrels")}
+                                        </Link>
+                                    </li>
                                 </>)}
                                 <li className="nav-item">
                                     <a href="/login" className="nav-link" onClick={logOut}>
@@ -113,6 +118,7 @@ export default function App() {
                         <Route exact path="/register" component={Register} />
                         <Route exact path="/users" component={User} />
                         <Route exact path="/profile" component={Profile} />
+                        <Route exact path="/barrels" component={Barrel} />
                         <Route exact path="/404" component={NotFound} />
                         <Route component={NotFound} />
                     </Switch>

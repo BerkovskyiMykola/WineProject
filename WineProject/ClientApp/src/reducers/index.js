@@ -3,10 +3,12 @@ import auth from "./auth";
 import message from "./message";
 import user from "./user";
 import profile from "./profile";
+import barrel from "./barrel";
 
 export default combineReducers({
     auth,
     message,
     user,
     profile,
+    barrel
 });
