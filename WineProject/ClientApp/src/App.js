@@ -47,7 +47,7 @@ export default function App() {
     return (
         <Router history={history}>
             <div>
-                <nav className="navbar navbar-expand navbar-dark bg-dark">
+                <nav className="navbar navbar-expand navbar-dark bg-primary">
                     <Link to={"/"} className="navbar-brand">
                         WineProject
                     </Link>

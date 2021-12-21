@@ -19,11 +19,11 @@ const UserList = ({ users, deleteUser, editUser }) => {
     }
 
     return (
-        <Table dark>
+        <Table bordered>
             <thead>
                 <tr>
                     <th>#</th>
-                    <th>{t("Firsname")}</th>
+                    <th>{t("Firstname")}</th>
                     <th>{t("Lastname")}</th>
                     <th>{t("Email")}</th>
                     <th>{t("Role")}</th>
