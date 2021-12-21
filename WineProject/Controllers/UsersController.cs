@@ -118,25 +118,34 @@ namespace WineProject.Controllers
         public async Task<ActionResult<IEnumerable<User>>> GetUsers()
         {
             return Ok(await _context.Users
+                .Include(x => x.Role)
                 .Where(x => x.Email != HttpContext.User.Identity.Name)
-                .Select(x => new { x.UserId, x.Firstname, x.Lastname, x.Email, x.Role })
+                .Select(x => new { x.UserId, x.Firstname, x.Lastname, x.Email, Role = x.Role.Name })
                 .ToListAsync());
         }
 
         [HttpPost("create")]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> PostUser(User model)
+        public async Task<IActionResult> PostUser(UserRequest model)
         {
             if (await _context.Users.AnyAsync(x => x.Email == model.Email))
             {
                 return BadRequest("User with such Email exists");
             }
-            model.Password = GetPasswordHash(model.Password);
 
-            await _context.Users.AddAsync(model);
+            var user = new User
+            {
+                Lastname = model.Lastname,
+                Firstname = model.Firstname,
+                Email = model.Email,
+                Password = GetPasswordHash(model.Password),
+                Role = await _context.Roles.SingleOrDefaultAsync(x => x.Name == model.Role)
+            };
+
+            await _context.Users.AddAsync(user);
             await _context.SaveChangesAsync();
 
-            return Ok(new { model.UserId, model.Firstname, model.Lastname, model.Email, model.Role });
+            return Ok(new { user.UserId, user.Firstname, user.Lastname, user.Email, Role = user.Role.Name });
         }
 
         [HttpPut("edit/{id}")]
