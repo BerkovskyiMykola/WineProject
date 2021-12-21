@@ -9,6 +9,7 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import Profile from "./components/Profile";
 import Barrel from "./components/Barrel/Barrel";
+import Measurement from "./components/Measurement/Measurement";
 import User from "./components/User/User";
 import { Home } from "./components/Home";
 import NotFound from "./components/NotFound";
@@ -19,6 +20,8 @@ import { clearMessage } from "./actions/message";
 import { history } from './utils/history';
 import EventBus from "./common/EventBus";
 import { useTranslation } from "react-i18next";
+import History from "./components/Barrel/History";
+import MeasurementHistory from "./components/Measurement/MeasurementHistory";
 
 export default function App() {
     const { t, i18n } = useTranslation();
@@ -78,20 +81,27 @@ export default function App() {
                                     {t("Profile")}
                                 </Link>
                             </li>
-                                {user.role === "Admin" ? (
-                                    <><li className="nav-item">
+                                {user.role === "Admin" &&
+                                    <li className="nav-item">
                                         <Link to={"/users"} className="nav-link">
                                             {t("Users")}
                                         </Link>
                                     </li>
-                                    </>
-                                ) : (<>
+                                }
+                                {user.role === "User" || user.role === "VIP" &&
                                     <li className="nav-item">
                                         <Link to={"/barrels"} className="nav-link">
                                             {t("Barrels")}
                                         </Link>
                                     </li>
-                                </>)}
+                                }
+                                {user.role === "VIP" &&
+                                    <li className="nav-item">
+                                        <Link to={"/history"} className="nav-link">
+                                            {t("History")}
+                                        </Link>
+                                    </li>
+                                }
                                 <li className="nav-item">
                                     <a href="/login" className="nav-link" onClick={logOut}>
                                         {t("LogOut")}
@@ -103,10 +113,10 @@ export default function App() {
                                     {t("Login")}
                                 </Link>
                             </li><li className="nav-item">
-                                    <Link to={"/register"} className="nav-link">
-                                        {t("SignUp")}
-                                    </Link>
-                                </li></>
+                                <Link to={"/register"} className="nav-link">
+                                    {t("SignUp")}
+                                </Link>
+                            </li></>
                         )}
                     </div>
                 </nav>
@@ -119,6 +129,9 @@ export default function App() {
                         <Route exact path="/users" component={User} />
                         <Route exact path="/profile" component={Profile} />
                         <Route exact path="/barrels" component={Barrel} />
+                        <Route exact path="/history" component={History} />
+                        <Route exact path="/measurements/:id" component={Measurement} />
+                        <Route exact path="/measurementHistory/:id" component={MeasurementHistory} />
                         <Route exact path="/404" component={NotFound} />
                         <Route component={NotFound} />
                     </Switch>

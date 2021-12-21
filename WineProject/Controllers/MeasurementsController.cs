@@ -33,16 +33,20 @@ namespace WineProject.Controllers
                 return BadRequest();
             }
 
-            return Ok(barrel.Measurements.Select(x => new { 
-                x.MeasurementId, 
-                x.Temperature, 
-                x.SugarContent, 
-                x.Transparency, 
-                x.AlcoholContent, 
-                x.Acidity, 
-                x.Weight, 
-                x.DateTime
-            }));
+            return Ok(new { 
+                barrel.Sort,
+                barrel.DateStart,
+                measurements = barrel.Measurements.OrderByDescending(x => x.DateTime).Select(x => new {
+                    x.MeasurementId,
+                    x.Temperature,
+                    x.SugarContent,
+                    x.Transparency,
+                    x.AlcoholContent,
+                    x.Acidity,
+                    x.Weight,
+                    x.DateTime
+                })
+            });
         }
 
         [Authorize(Roles = "User,VIP")]

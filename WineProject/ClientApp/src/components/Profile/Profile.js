@@ -77,6 +77,9 @@ export default function Profile(props) {
             <p>
                 <strong>{t("Email")}:</strong> {profile.email}
             </p>
+            <p>
+                <strong>{t("Role")}:</strong> {profile.role}
+            </p>
             <ModalWindow modal={modalEdit} deactiveModal={() => { setModalEdit(false); }} textHeader={t("Edit")}
                 setForm={(c) => { setForm(c); }} checkBtn={checkBtn} setCheckBtn={(c) => { setCheckBtn(c); }}
                 textButton={t("Edit")} method={editRecord} form={form} message={message}

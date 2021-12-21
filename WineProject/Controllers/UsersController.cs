@@ -79,6 +79,7 @@ namespace WineProject.Controllers
         public async Task<IActionResult> GetUser()
         {
             var user = await _context.Users
+                .Include(x => x.Role)
                 .SingleOrDefaultAsync(x => x.Email == HttpContext.User.Identity.Name);
 
             if (user == null)
@@ -90,7 +91,8 @@ namespace WineProject.Controllers
             {
                 user.Firstname,
                 user.Lastname,
-                user.Email
+                user.Email,
+                Role = user.Role.Name
             });
         }
 

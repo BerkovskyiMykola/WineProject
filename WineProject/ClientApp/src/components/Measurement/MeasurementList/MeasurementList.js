@@ -1,14 +1,14 @@
 ﻿import React from 'react'
 import {  useTranslation } from 'react-i18next';
 import { Table, Container, Row, Col } from "reactstrap";
-import BarrelItem from '../BarrelItem/BarrelItem';
-import "./BarrelList.css";
+import MeasurementItem from '../MeasurementItem/MeasurementItem';
+import "./MeasurementList.css";
 
-const BarrelList = ({ barrels, deleteBarrel, editBarrel, VIP }) => {
+const MeasurementList = ({ measurements }) => {
 
     const { t } = useTranslation();
 
-    if (barrels.length === 0) {
+    if (measurements.length === 0) {
         return (
             <Container style={{ backgroundColor: "#F2F2F2" }}>
                 <Row className="text-center">
@@ -23,17 +23,20 @@ const BarrelList = ({ barrels, deleteBarrel, editBarrel, VIP }) => {
             <thead>
                 <tr>
                     <th>#</th>
-                    <th>{t("sort")}</th>
-                    <th>{t("dateStart")}</th>
-                    <th>{t("amountMonth")}</th>
-                    <th>{t("Actions")}</th>
+                    <th>{t("Temperature")}</th>
+                    <th>{t("SugarContent")}</th>
+                    <th>{t("Transparency")}</th>
+                    <th>{t("AlcoholContent")}</th>
+                    <th>{t("Acidity")}</th>
+                    <th>{t("Weight")}</th>
+                    <th>{t("DateTime")}</th>
                 </tr>
             </thead>
             <tbody>
-                {barrels.map((item, index) => (<BarrelItem key={item.barrelId} item={item} index={index} deleteBarrel={deleteBarrel} editBarrel={editBarrel} VIP={VIP} />))}
+                {measurements.map((item, index) => (<MeasurementItem key={item.measurementId} item={item} index={index} />))}
             </tbody>
         </Table>
     );
 };
 
-export default BarrelList;
+export default MeasurementList;
