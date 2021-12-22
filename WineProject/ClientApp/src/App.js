@@ -22,6 +22,7 @@ import EventBus from "./common/EventBus";
 import { useTranslation } from "react-i18next";
 import History from "./components/Barrel/History";
 import MeasurementHistory from "./components/Measurement/MeasurementHistory";
+import Donate from "./components/Donate/Donate";
 
 export default function App() {
     const { t, i18n } = useTranslation();
@@ -88,19 +89,29 @@ export default function App() {
                                         </Link>
                                     </li>
                                 }
-                                {user.role === "User" || user.role === "VIP" &&
-                                    <li className="nav-item">
+                                {user.role === "User" &&
+                                    <><li className="nav-item">
                                         <Link to={"/barrels"} className="nav-link">
                                             {t("Barrels")}
                                         </Link>
                                     </li>
+                                    <li className="nav-item">
+                                        <Link to={"/donate"} className="nav-link">
+                                            {t("Donate")}
+                                        </Link>
+                                    </li></>
                                 }
                                 {user.role === "VIP" &&
+                                    <><li className="nav-item">
+                                        <Link to={"/barrels"} className="nav-link">
+                                            {t("Barrels")}
+                                        </Link>
+                                    </li>
                                     <li className="nav-item">
                                         <Link to={"/history"} className="nav-link">
                                             {t("History")}
                                         </Link>
-                                    </li>
+                                    </li></>
                                 }
                                 <li className="nav-item">
                                     <a href="/login" className="nav-link" onClick={logOut}>
@@ -133,6 +144,7 @@ export default function App() {
                         <Route exact path="/measurements/:id" component={Measurement} />
                         <Route exact path="/measurementHistory/:id" component={MeasurementHistory} />
                         <Route exact path="/404" component={NotFound} />
+                        <Route exact path="/donate" component={Donate} />
                         <Route component={NotFound} />
                     </Switch>
                 </div>
