@@ -86,7 +86,7 @@ const Barrel = () => {
                 <Row>
                     <Col className="text-left"><h3>{t("Barrels")}</h3></Col>
                     <Col className="text-right">
-                        <Button onClick={() => setModalAdd(true)} color="success">{t("Create")}</Button>
+                        <Button onClick={() => { clearFields(); setModalAdd(true); }} color="success">{t("Create")}</Button>
                         <Button onClick={() => { dispatch(getActiveBarrels()); }}>
                             <i className="fa fa-refresh" aria-hidden="true"></i>
                         </Button>

@@ -135,13 +135,15 @@ namespace WineProject.Controllers
                 return BadRequest("User with such Email exists");
             }
 
+            var a = await _context.Roles.SingleOrDefaultAsync(x => x.Name == model.Role);
+
             var user = new User
             {
                 Lastname = model.Lastname,
                 Firstname = model.Firstname,
                 Email = model.Email,
                 Password = GetPasswordHash(model.Password),
-                Role = await _context.Roles.SingleOrDefaultAsync(x => x.Name == model.Role)
+                Role = a
             };
 
             await _context.Users.AddAsync(user);

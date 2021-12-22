@@ -22,7 +22,7 @@ const User = (props) => {
     const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [role, setRole] = useState(2);
+    const [role, setRole] = useState("User");
     const [form, setForm] = useState(null);
     const [checkBtn, setCheckBtn] = useState(null);
 

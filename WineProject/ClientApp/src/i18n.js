@@ -40,6 +40,8 @@ i18n.use(LanguageDetector).init({
                 "Barrel": "Barrel",
                 "needs topping up": "needs topping up",
                 "History": "History",
+                "Donate": "Donate",
+                "Get VIP": "Get VIP",
 
                 "This field is required!": "This field is required!",
                 "This is not a valid email. Example: example@example.com": "This is not a valid email. Example: example@example.com",
@@ -87,9 +89,11 @@ i18n.use(LanguageDetector).init({
                 Weight: "Маса",
                 DateTime: "Дата й час",
                 "All OK": "Все ок",
-                "Barrel": "Боска",
+                "Barrel": "Бочка",
                 "needs topping up": "потребує долив",
                 "History": "Історія",
+                "Donate": "Донат",
+                "Get VIP": "Отримати VIP",
 
                 "This field is required!": "Це поле необхідне!",
                 "This is not a valid email. Example: example@example.com": "Це не валідна пошта. Наприклад: example@example.com",

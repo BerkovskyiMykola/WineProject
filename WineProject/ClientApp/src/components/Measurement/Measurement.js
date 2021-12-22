@@ -50,7 +50,7 @@ const Measurement = (props) => {
                 </Row>
             </header>
             {measurements && measurements[0] &&
-                <Alert variant={measurements[0].transparency === 1 ? "danger" : "success" } style={{ textAlign: 'center' }}>
+                <Alert color={(measurements[0].transparency === 1) ? "danger" : "success" } style={{ textAlign: 'center' }}>
                     {measurements[0].transparency === 1 ? t("Barrel") + " " + id + " " + t("needs topping up") : t("All OK")}
                 </Alert>
             }
